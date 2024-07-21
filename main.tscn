@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7ubrih0myoa2"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_cjvvm"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_cjvvm")
+
+[node name="menu_canvas" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="menu_canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu_canvas/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 309.0
+offset_top = -216.0
+offset_right = -284.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="host" type="Button" parent="menu_canvas/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+text = "HOST"
+
+[node name="join" type="Button" parent="menu_canvas/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+text = "JOIN
+"
+
+[node name="ip_selected" type="TextEdit" parent="menu_canvas/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+placeholder_text = "xxx.xxx.xxx.xxx"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="menu_canvas/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ip_list" type="RichTextLabel" parent="menu_canvas/Panel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "IP LIST"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="menu_canvas/Panel/VBoxContainer/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="menu_canvas/Panel/VBoxContainer/join" to="." method="_on_join_pressed"]
+[connection signal="text_changed" from="menu_canvas/Panel/VBoxContainer/ip_selected" to="." method="_on_ip_selected_text_changed"]
